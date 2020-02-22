@@ -1,0 +1,29 @@
+{
+  "name": "juniior1993/Phrases_Analysis",
+  "description": "Analise de repetição de frases para o setor de traduções",
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Darci Schmidt Hort Junior",
+      "email": "juniior1993@gmail.com"
+    }
+  ],
+  "config": {
+    "vendor-lib": "vendor"
+  },
+  "autoload": {
+    "psr-4": {
+      "Source\\": "source/"
+    },
+    "files": [
+      "source/Boot/Config.php",
+      "source/Boot/Utils.php"
+    ]
+  },
+  "require": {
+    "php": "^7.1",
+    "coffeecode/router": "1.0.*",
+    "league/plates": "v4.0.0-alpha"
+  }
+}
