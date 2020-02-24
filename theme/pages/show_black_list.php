@@ -17,21 +17,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($blacklist as $segment): ?>
+                        <?php if ($blacklist): ?>
+                            <?php foreach ($blacklist as $segment): ?>
 
-                            <tr>
-                                <td>
-                                    <?= $segment->phrase; ?>
-                                </td>
-                                <td style="text-align: center">
-                                    <button type="button" class="btn btn-sm btn-outline-danger"
-                                            data-action="<?= $router->route("delete.blacklist"); ?>"
-                                            data-segment="<?= $segment->id; ?>">
-                                        Remover da BlackList
-                                    </button>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
+                                <tr>
+                                    <td>
+                                        <?= $segment->phrase; ?>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                                data-action="<?= $router->route("delete.blacklist"); ?>"
+                                                data-segment="<?= $segment->id; ?>">
+                                            Remover da BlackList
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                         </tbody>
                     </table>
                 </div>

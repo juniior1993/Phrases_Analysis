@@ -126,6 +126,9 @@ class Phrases_Analysis
             $continue = true;
             while ($continue) {
                 $segment = $this->returnSegmentByNumberOfWords($numberOfWords, $i);
+                if(!$this->blackList) {
+                    $this->blackList[] = "false";
+                }
                 if (!array_key_exists($segment, $this->segmentsAndRepetitions) && !in_array($segment, $this->blackList)) {
                     $result = $this->repetitionsAnalyze($segment);
                     if ($result < $this->minRepetitions) {
