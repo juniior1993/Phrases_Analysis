@@ -37,6 +37,10 @@ class Phrases_Analysis
 
     private int $minRepetitions;
 
+    public array $uniqueNumberOfWords;
+
+    public array $uniqueNumberOfRepetitions;
+
     /**
      * Phrases_Analysis constructor.
      */
@@ -57,11 +61,13 @@ class Phrases_Analysis
     public function setMinWords(int $num)
     {
         $this->minWords = $num;
+        return $this;
     }
 
     public function setMinRepetitions(int $num)
     {
         $this->minRepetitions = $num;
+        return $this;
     }
 
 
@@ -69,7 +75,7 @@ class Phrases_Analysis
     {
         $this->loopSegments();
         krsort($this->segmentsAndRepetitions);
-        foreach ($this->segmentsAndRepetitions as $key => $repetition){
+        foreach ($this->segmentsAndRepetitions as $key => $repetition) {
             arsort($this->segmentsAndRepetitions[$key]);
         }
 
@@ -96,6 +102,8 @@ class Phrases_Analysis
     public function setText(string $text)
     {
         $this->allText = $text;
+
+        return $this;
     }
 
     public function repetitionsAnalyze(string $segment)
@@ -126,7 +134,7 @@ class Phrases_Analysis
             $continue = true;
             while ($continue) {
                 $segment = $this->returnSegmentByNumberOfWords($numberOfWords, $i);
-                if(!$this->blackList) {
+                if (!$this->blackList) {
                     $this->blackList[] = "false";
                 }
                 if (!array_key_exists($segment, $this->segmentsAndRepetitions) && !in_array($segment, $this->blackList)) {
@@ -272,6 +280,23 @@ class Phrases_Analysis
 
         return $this;
 
+    }
+
+    public function getUniqueNumberOfRepetitionsAndWords()
+    {
+        $arrayRepetitionTemp = [];
+        $arrayWordsTemp = [];
+
+        foreach ($this->segmentsAndRepetitions as $repetition => $segments) {
+            $arrayRepetitionTemp = array_merge([$repetition], $arrayRepetitionTemp);
+            foreach ($segments as $numberOfWords) {
+                $arrayWordsTemp = array_merge($arrayWordsTemp, [$numberOfWords]);
+            }
+        }
+
+        $this->uniqueNumberOfRepetitions = $arrayRepetitionTemp;
+        $this->uniqueNumberOfWords = array_unique($arrayWordsTemp);
+        return $this;
     }
 
 }

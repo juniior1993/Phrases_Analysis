@@ -9,7 +9,8 @@
     <script src="<?= url('/theme/js/jQuery.js') ?>"></script>
     <link rel="stylesheet" href="<?= url('/theme/css/bootstrap.min.css'); ?>">
     <script src="<?= url('/theme/js/bootstrap.min.js') ?>"></script>
-
+    <link rel="icon" href="<?= url('/theme/image/word.png'); ?>">
+    <?= $v->section("style"); ?>
 
     <title><?= $title; ?></title>
 </head>
@@ -41,8 +42,8 @@
         </nav>
     </div>
     <br><br>
+    <br><br>
 <?php endif; ?>
-<br>
 <?= $v->section("content"); ?>
 
 <?= $v->section("scripts"); ?>

@@ -56,8 +56,11 @@
                 div.fadeOut();
             }, "json").fail(function () {
                 alert("Erro ao processar requisição");
-            })
-        })
+            });
+        });
+
+
+
 
 
     })

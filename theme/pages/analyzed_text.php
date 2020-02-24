@@ -5,18 +5,69 @@
     <div class="row">
         <div class="col-2">
         </div>
-        <div class="col-10">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header">
+                    <b>Filtros</b>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Segmento</span>
+                                </div>
+                                <input type="text" class="form-control" id="filterSegment"
+                                       aria-label="digite o segmento">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="selectPalavras">Palavras</label>
+                                </div>
+                                <select class="custom-select" id="selectPalavras" name="selectPalavras">
+                                    <option selected value="0">...</option>
+                                    <?php foreach ($filterWords as $number): ?>
+                                        <option value="<?= $number; ?>"><?= $number; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="selectRepeticao">Repetição</label>
+                                </div>
+                                <select class="custom-select" id="selectRepeticao" name="selectRepeticao">
+                                    <option selected value="0">...</option>
+                                    <?php foreach ($filterRepetitions as $number): ?>
+                                        <option value="<?= $number; ?>"><?= $number; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-8">
             <div class="card">
                 <div class="card-header">
                     <b>Resultado</b>
                 </div>
                 <div class="card-body">
-                    <table class="table table-hover table-responsive-sm">
+                    <table class="table table-hover table-sm" id="tableSegments">
                         <thead>
                         <tr>
                             <th scope="col">Segmento</th>
                             <th scope="col" style="text-align: center">Repetição</th>
                             <th scope="col" style="text-align: center">Black List</th>
+                            <th scope="col" style="width: 0"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,12 +81,13 @@
                                         <?= $numberOfRepetitions; ?>
                                     </td>
                                     <td style="text-align: center">
-                                        <button type="button" class="btn btn-outline-danger"
+                                        <button type="button" class="btn btn-outline-danger btn-sm"
                                                 data-action="<?= $router->route("add.blacklist"); ?>"
                                                 data-segment="<?= $phrase; ?>">
                                             Adicionar
                                         </button>
                                     </td>
+                                    <td style="visibility:hidden; width: 0" class="divOne"><?= $character; ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endforeach; ?>
@@ -62,10 +114,59 @@
             }, "json").fail(function () {
                 alert("Erro ao processar requisição");
             })
-        })
+        });
+
+        $("body").on("keyup change", "#selectRepeticao, #selectPalavras, #filterSegment", function (event) {
+
+            let segment = $("#filterSegment").val();
+            let words = $("#selectPalavras").val();
+            let repetition = $("#selectRepeticao").val();
+            let table = $('#tableSegments');
+
+            if (segment || words || repetition) {
+                table.find('tr').each(function (i) {
+                    let text = $(this).find('td:eq(0)').text();
+                    let repetitionsCompare = $(this).find('td:eq(1)').text().trim();
+                    let wordsCompare = $(this).find('td:eq(3)').text();
+                    let search = text.search(segment);
+
+                    repetitionsCompare = parseInt(repetitionsCompare);
+                    wordsCompare = parseInt(wordsCompare);
 
 
-    })
+                    if (!segment) {
+                        search = 2;
+                    } else {
+                        let search = text.search(segment);
+                    }
+                    if (words == 0) {
+                        wordsCompare = true;
+                    } else {
+                        wordsCompare = wordsCompare == words;
+                    }
+
+                    if (repetition == 0) {
+                        repetitionsCompare = true;
+                    } else {
+                        repetitionsCompare = repetitionsCompare == repetition;
+                    }
+
+                    if (search > 1 && wordsCompare && repetitionsCompare) {
+                        $(this).fadeIn(400);
+                    } else {
+                        if($(this).find("th").length == 0){
+                            $(this).fadeOut(400);
+                        }
+
+                    }
+                });
+            } else {
+                table.find('tr').each(function (i) {
+                    $(this).stop().fadeIn(400);
+                });
+            }
+        });
+    });
 </script>
 <?php $v->end(); ?>
 

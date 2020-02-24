@@ -31,15 +31,19 @@ class Web
     {
         $text = trim(filter_var($data['textToAnalyze'], FILTER_SANITIZE_STRING));
         $analysis = new Phrases_Analysis();
-        $analysis->setText($text);
-        $analysis->getWordsAndSplit($text);
-        $analysis->setMinWords($data['wordsToAnalyze']);
-        $analysis->setMinRepetitions($data['wordsToShow']);
-        $analysis->analyze();
+        $analysis->setText($text)
+            ->getWordsAndSplit($text)
+            ->setMinWords($data['wordsToAnalyze'])
+            ->setMinRepetitions($data['wordsToShow'])
+            ->analyze()
+            ->getUniqueNumberOfRepetitionsAndWords();
+
 
         echo $this->view->render("analyzed_text", [
             "title" => "Resultado da analize",
-            "phrases" => $analysis->segmentsAndRepetitions
+            "phrases" => $analysis->segmentsAndRepetitions,
+            "filterWords" => $analysis->uniqueNumberOfWords,
+            "filterRepetitions" => $analysis->uniqueNumberOfRepetitions
         ]);
     }
 
@@ -57,7 +61,6 @@ class Web
         $blackList = new BlackList();
         echo json_encode($blackList->deleteSegment($data['segment']));
     }
-
 
 
     public function blackList()
