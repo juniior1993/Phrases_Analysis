@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bcefaf3195d05ce0200dfdee34c21c59",
+    "content-hash": "3908de3a7a0844af33629a8a1941c0b1",
     "packages": [
         {
             "name": "coffeecode/router",
@@ -131,7 +131,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "ext-pdo": "*"
     },
     "platform-dev": []
 }

@@ -18,6 +18,10 @@ $router->namespace("Source\App");
  */
 $router->group(null);
 $router->get("/", "Web:home");
+$router->post("/text_analyze", "Web:textAnalyze");
+$router->post("/addBlackList", "Web:addBlacklist", "add.blacklist");
+$router->get("/blackList", "Web:blackList", "show.blacklist");
+$router->post("/deleteBlackList", "Web:deleteBlackList", "delete.blacklist");
 
 
 /*

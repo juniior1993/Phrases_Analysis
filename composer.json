@@ -22,8 +22,10 @@
     ]
   },
   "require": {
-    "php": "^7.1",
+    "php": "^7.4",
+    "ext-pdo": "*",
     "coffeecode/router": "1.0.*",
-    "league/plates": "v4.0.0-alpha"
+    "league/plates": "v4.0.0-alpha",
+    "ext-json": "*"
   }
 }

@@ -16,5 +16,9 @@ function url(string $path = null): string
         return CONF_URL_TEST . "/" . ($path[0] == "/" ? mb_substr($path, 1) : $path);
     }
     return CONF_URL_TEST;
+}
 
+function prepareUrl(string $url): string
+{
+    return str_replace(" ", "%", $url);
 }
