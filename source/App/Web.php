@@ -10,7 +10,8 @@ use Source\Models\BlackList;
 class Web
 {
 
-    private $view;
+    /** @var Engine */
+    private Engine $view;
 
     public function __construct($router)
     {
@@ -27,11 +28,17 @@ class Web
     }
 
 
-    public function textAnalyze($data)
+    public function textAnalyze(array $data): void
     {
         $text = trim(filter_var($data['textToAnalyze'], FILTER_SANITIZE_STRING));
+        $caseSensitive = false;
+        if (isset($data['caseSensitive'])) {
+            $caseSensitive = true;
+        }
+
         $analysis = new Phrases_Analysis();
-        $analysis->setText($text)
+        $analysis->caseSensitive($caseSensitive)
+            ->setText($text)
             ->getWordsAndSplit($text)
             ->setMinWords($data['wordsToAnalyze'])
             ->setMinRepetitions($data['wordsToShow'])
@@ -49,7 +56,7 @@ class Web
 
     }
 
-    public function addBlacklist($data)
+    public function addBlacklist(array $data): void
     {
 
         $blackList = new BlackList();
@@ -65,7 +72,7 @@ class Web
     }
 
 
-    public function blackList()
+    public function blackList(array $data): void
     {
         $blackList = (new BlackList())->showAll();
         echo $this->view->render("show_black_list", [

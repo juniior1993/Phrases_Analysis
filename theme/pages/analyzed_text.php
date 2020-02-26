@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Segmento</span>
@@ -21,7 +21,25 @@
                                        aria-label="digite o segmento">
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="valExato"
+                                       value="1" checked>
+                                <label class="form-check-label" for="valExato">
+                                    Valores Exatos
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="exampleRadios" id="maiorQue"
+                                       value="2" checked>
+                                <label class="form-check-label" for="maiorQue">
+                                    Valores maiores
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-4">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="selectPalavras">Palavras</label>
@@ -34,7 +52,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="selectRepeticao">Repetição</label>
@@ -116,12 +134,13 @@
             })
         });
 
-        $("body").on("keyup change", "#selectRepeticao, #selectPalavras, #filterSegment", function (event) {
+        $("body").on("keyup change", "#selectRepeticao, #selectPalavras, #filterSegment, #valExato, #maiorQue", function (event) {
 
             let segment = $("#filterSegment").val();
             let words = $("#selectPalavras").val();
             let repetition = $("#selectRepeticao").val();
             let table = $('#tableSegments');
+            let tipoPesquisa = $("input:checked").val();
 
             if (segment || words || repetition) {
                 table.find('tr').each(function (i) {
@@ -142,19 +161,29 @@
                     if (words == 0) {
                         wordsCompare = true;
                     } else {
-                        wordsCompare = wordsCompare == words;
+
+                        if (tipoPesquisa == 1) {
+                            wordsCompare = wordsCompare == words;
+                        } else if (tipoPesquisa == 2) {
+                            wordsCompare = wordsCompare >= words;
+                        }
                     }
 
                     if (repetition == 0) {
                         repetitionsCompare = true;
                     } else {
-                        repetitionsCompare = repetitionsCompare == repetition;
+
+                        if (tipoPesquisa == 1) {
+                            repetitionsCompare = repetitionsCompare == repetition;
+                        } else if (tipoPesquisa == 2) {
+                            repetitionsCompare = repetitionsCompare >= repetition;
+                        }
                     }
 
                     if (search > 1 && wordsCompare && repetitionsCompare) {
                         $(this).fadeIn(400);
                     } else {
-                        if($(this).find("th").length == 0){
+                        if ($(this).find("th").length == 0) {
                             $(this).fadeOut(400);
                         }
 

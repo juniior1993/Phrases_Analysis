@@ -16,7 +16,7 @@
                                       id="textToAnalyze"
                                       name="textToAnalyze"
                                       rows="15" required></textarea>
-                        <span>Palavras: <b id="counterWords"></b></span>
+                        <span>Palavras: <b id="counterWords">0</b></span>
                     </div>
                 </div>
 
@@ -29,7 +29,8 @@
                                id="wordsToAnalyze"
                                placeholder="5"
                                name="wordsToAnalyze"
-                               style="text-align: center" required>
+                               style="text-align: center" required
+                               autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group row ">
@@ -41,7 +42,8 @@
                                id="wordsToShow"
                                placeholder="2"
                                name="wordsToShow"
-                               style="text-align: center" required>
+                               style="text-align: center" required
+                               autocomplete="off">
                     </div>
                     <label for="wordsToShow"
                            class="col-sm-3
@@ -53,7 +55,8 @@
                         <label for="caseSensitive">Case sensitive</label>
                     </div>
                     <div class=" col-sm-3">
-                        <input class="" type="checkbox" id="caseSensitive" name="caseSensitive">
+                        <input class="" type="checkbox" id="caseSensitive" name="caseSensitive"
+                               style="margin: 0 0 0 10px">
                     </div>
 
                 </div>

@@ -12,34 +12,22 @@ use Source\Models\BlackList;
  */
 class Phrases_Analysis
 {
-    private $blackList;
-
     public array $segmentsAndRepetitions;
-
-    private string $allText;
-
-    /**
-     * @var array
-     */
-    public array $wordsSplited;
-
-    /**
-     * @var array
-     */
-    public array $segmentsByNumberOfWords;
-
-    /**
-     * @var array
-     */
-    public array $unionArrays;
-
-    private int $minWords;
-
-    private int $minRepetitions;
 
     public array $uniqueNumberOfWords;
 
     public array $uniqueNumberOfRepetitions;
+
+    /* BlackList object */
+    private array $blackList;
+
+    private string $allText;
+
+    private array $wordsSplited;
+
+    private int $minWords;
+
+    private int $minRepetitions;
 
     private bool $caseSensitive;
 
@@ -50,25 +38,30 @@ class Phrases_Analysis
     {
         $this->blackList = (new BlackList())->load("phrase");
 
+        /**
+         * DEFAULTS CONFIGURATIONS
+         */
         $this->segmentsAndRepetitions = [];
         $this->wordsSplited = [];
         $this->minWords = 2;
         $this->minRepetitions = 2;
-        $this->caseSensitive = false;
+        $this->caseSensitive = true;
 
         ini_set('memory_limit', '1024M');
-        ini_set('max_execution_time', '300');
+        ini_set('max_execution_time', '500');
     }
 
-    public function setMinWords(int $num)
+    public function setMinWords(int $num): Phrases_Analysis
     {
         $this->minWords = $num;
         return $this;
     }
 
-    public function caseSensitive(bool $caseSensitive)
+    public function caseSensitive(bool $caseSensitive): Phrases_Analysis
     {
         $this->caseSensitive = $caseSensitive;
+
+        return $this;
     }
 
     public function setMinRepetitions(int $num)
@@ -91,20 +84,15 @@ class Phrases_Analysis
 
 
     /**
-     * @param string $text
      * @return Phrases_Analysis|null
      */
-    public function getWordsAndSplit(string $text): ?Phrases_Analysis
+    public function getWordsAndSplit(): ?Phrases_Analysis
     {
-        if (!strpos($text, " ")) {
+        if (!strpos($this->allText, " ")) {
             return null;
         }
 
-        if ($this->caseSensitive) {
-            $this->$text = strtolower($text);
-        }
-
-        $this->wordsSplited = explode(" ", trim(preg_replace('/\s+/', ' ', $text)));
+        $this->wordsSplited = explode(" ", trim(preg_replace('/\s+/', ' ', $this->allText)));
 
         $this->clearTrash();
 
@@ -113,6 +101,11 @@ class Phrases_Analysis
 
     public function setText(string $text)
     {
+
+        if (!$this->caseSensitive) {
+            $text = strtolower($text);
+        }
+
         $this->allText = $text;
 
         return $this;
@@ -127,8 +120,8 @@ class Phrases_Analysis
         $lastPos = 0;
         $numberTotal = 0;
 
-        if ($this->caseSensitive) {
-            $this->$segment = strtolower($segment);
+        if (!$this->caseSensitive) {
+            $segment = strtolower($segment);
         }
 
         while (($lastPos = strpos($this->allText, $segment, $lastPos)) !== false) {
@@ -220,6 +213,7 @@ class Phrases_Analysis
             }
         }
 
+        asort($arrayWordsTemp);
         $this->uniqueNumberOfRepetitions = $arrayRepetitionTemp;
         $this->uniqueNumberOfWords = array_unique($arrayWordsTemp);
         return $this;
