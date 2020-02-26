@@ -140,7 +140,7 @@
             let words = $("#selectPalavras").val();
             let repetition = $("#selectRepeticao").val();
             let table = $('#tableSegments');
-            let tipoPesquisa = $("input:checked").val();
+            let typeSearch = $("input:checked").val();
 
             if (segment || words || repetition) {
                 table.find('tr').each(function (i) {
@@ -162,9 +162,9 @@
                         wordsCompare = true;
                     } else {
 
-                        if (tipoPesquisa == 1) {
+                        if (typeSearch == 1) {
                             wordsCompare = wordsCompare == words;
-                        } else if (tipoPesquisa == 2) {
+                        } else if (typeSearch == 2) {
                             wordsCompare = wordsCompare >= words;
                         }
                     }
@@ -173,9 +173,9 @@
                         repetitionsCompare = true;
                     } else {
 
-                        if (tipoPesquisa == 1) {
+                        if (typeSearch == 1) {
                             repetitionsCompare = repetitionsCompare == repetition;
-                        } else if (tipoPesquisa == 2) {
+                        } else if (typeSearch == 2) {
                             repetitionsCompare = repetitionsCompare >= repetition;
                         }
                     }
