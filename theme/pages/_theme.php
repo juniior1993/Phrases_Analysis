@@ -8,6 +8,7 @@
 
     <script src="<?= url('/theme/js/jQuery.js') ?>"></script>
     <link rel="stylesheet" href="<?= url('/theme/css/bootstrap.min.css'); ?>">
+    <link rel="stylesheet" href="<?= url('/theme/css/style.css'); ?>">
     <script src="<?= url('/theme/js/bootstrap.min.js') ?>"></script>
     <link rel="icon" href="<?= url('/theme/image/word.png'); ?>">
     <?= $v->section("style"); ?>
@@ -41,9 +42,8 @@
             </div>
         </nav>
     </div>
-    <br><br>
-    <br><br>
 <?php endif; ?>
+<div class="menu-fix"></div>
 <?= $v->section("content"); ?>
 
 <?= $v->section("scripts"); ?>

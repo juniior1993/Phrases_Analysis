@@ -33,7 +33,7 @@ class BlackList extends Model
         }
     }
 
-    public function load($columns = "*")
+    public function load($columns = "*"): ?array
     {
         $all = $this->read("SELECT {$columns} FROM " . self::$entity);
 
@@ -43,7 +43,7 @@ class BlackList extends Model
         return $all->fetchAll(\PDO::FETCH_COLUMN);
     }
 
-    public function showAll()
+    public function showAll(): ?array
     {
         $all = $this->read("SELECT * FROM " . self::$entity);
 

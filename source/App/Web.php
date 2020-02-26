@@ -45,6 +45,8 @@ class Web
             "filterWords" => $analysis->uniqueNumberOfWords,
             "filterRepetitions" => $analysis->uniqueNumberOfRepetitions
         ]);
+
+
     }
 
     public function addBlacklist($data)
