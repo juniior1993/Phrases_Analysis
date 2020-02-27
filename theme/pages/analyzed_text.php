@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col-2">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="exampleRadios" id="valExato"
                                        value="1" checked>
@@ -35,11 +35,11 @@
                                 <input class="form-check-input" type="radio" name="exampleRadios" id="maiorQue"
                                        value="2" checked>
                                 <label class="form-check-label" for="maiorQue">
-                                    Valores maiores
+                                    Valores Maiores
                                 </label>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-5">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="selectPalavras">Palavras</label>
@@ -52,7 +52,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-5">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="selectRepeticao">Repetição</label>
