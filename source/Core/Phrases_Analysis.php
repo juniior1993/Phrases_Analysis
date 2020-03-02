@@ -48,7 +48,7 @@ class Phrases_Analysis
         $this->caseSensitive = true;
 
         ini_set('memory_limit', '1024M');
-        ini_set('max_execution_time', '500');
+        ini_set('max_execution_time', '1000');
     }
 
     public function setMinWords(int $num): Phrases_Analysis
