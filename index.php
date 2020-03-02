@@ -22,6 +22,7 @@ $router->post("/text_analyze", "Web:textAnalyze");
 $router->post("/addBlackList", "Web:addBlacklist", "add.blacklist");
 $router->get("/blackList", "Web:blackList", "show.blacklist");
 $router->post("/deleteBlackList", "Web:deleteBlackList", "delete.blacklist");
+$router->get("/exportCSV", "Web:exportExcel", "export.CSV");
 
 
 /*

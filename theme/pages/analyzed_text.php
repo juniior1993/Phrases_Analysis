@@ -1,6 +1,5 @@
 <?php $v->layout("_theme"); ?>
 
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-2">
@@ -19,11 +18,16 @@
                                 </div>
                                 <input type="text" class="form-control" id="filterSegment"
                                        aria-label="digite o segmento">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><input id="caseSensitiveSegment"
+                                                                          name="caseSensitiveSegment" type="checkbox"
+                                                                          aria-label="Case Sensitive">&nbsp Case Sensitive</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="exampleRadios" id="valExato"
                                        value="1" checked>
@@ -39,7 +43,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-4">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <label class="input-group-text" for="selectPalavras">Palavras</label>
@@ -63,6 +67,14 @@
                                         <option value="<?= $number; ?>"><?= $number; ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12" style="text-align: right">
+                            <div class="form-check">
+                                <a href="<?= $router->route("export.CSV"); ?>" target="_blank"><button type="button" class="btn btn-outline-primary" id="exportCSV">Exportar CSV
+                                </button></a>
                             </div>
                         </div>
                     </div>
@@ -101,7 +113,8 @@
                                     <td style="text-align: center">
                                         <button type="button" class="btn btn-outline-danger btn-sm"
                                                 data-action="<?= $router->route("add.blacklist"); ?>"
-                                                data-segment="<?= $phrase; ?>">
+                                                data-segment="<?= $phrase; ?>"
+                                                data-repetition="<?= $numberOfRepetitions; ?>">
                                             Adicionar
                                         </button>
                                     </td>

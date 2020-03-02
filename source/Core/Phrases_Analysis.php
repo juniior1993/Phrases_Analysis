@@ -178,6 +178,12 @@ class Phrases_Analysis
             if (substr(trim($segment), -1) == ".") {
                 return rtrim(trim($segment), ".");
             }
+
+            $pos = strpos(trim($segment), ".");
+            if (!$pos === false) {
+                return substr(trim($segment), "0", $pos);
+            }
+
             return trim($segment);
         }
         return "";
