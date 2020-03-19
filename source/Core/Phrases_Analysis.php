@@ -103,7 +103,7 @@ class Phrases_Analysis
     {
 
         if (!$this->caseSensitive) {
-            $text = strtolower($text);
+            $text = mb_strtolower($text);
         }
 
         $this->allText = $text;
@@ -121,7 +121,7 @@ class Phrases_Analysis
         $numberTotal = 0;
 
         if (!$this->caseSensitive) {
-            $segment = strtolower($segment);
+            $segment = mb_strtolower($segment);
         }
 
         while (($lastPos = strpos($this->allText, $segment, $lastPos)) !== false) {
@@ -181,7 +181,7 @@ class Phrases_Analysis
 
             $pos = strpos(trim($segment), ".");
             if (!$pos === false) {
-                return substr(trim($segment), "0", $pos);
+                return "";
             }
 
             return trim($segment);

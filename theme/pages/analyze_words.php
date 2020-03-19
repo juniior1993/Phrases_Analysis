@@ -1,6 +1,5 @@
 <?php $v->layout("_theme"); ?>
 
-<?= var_dump($_SESSION['analyze']); ?>
 <div class="container-sm">
     <div class="card">
         <div class="card-header">

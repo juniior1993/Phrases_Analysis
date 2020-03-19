@@ -175,11 +175,13 @@
                         wordsCompare = true;
                     } else {
 
+                        console.log(wordsCompare + '  ' + text + '  ' + typeSearch)
                         if (typeSearch == 1) {
                             wordsCompare = wordsCompare == words;
                         } else if (typeSearch == 2) {
                             wordsCompare = wordsCompare >= words;
                         }
+
                     }
 
                     if (repetition == 0) {
